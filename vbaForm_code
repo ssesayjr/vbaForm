@@ -1,0 +1,169 @@
+
+Private Sub cmdLookup_Click()
+    Dim lastrow As Long
+    Dim count As Integer
+    Dim wRow
+    Dim appT As New Excel.Application
+    Dim wSheetTwo As Excel.Worksheet
+    Dim wBookTwo As Excel.Workbook
+    
+    If frmDataEntry.cmbTxtName.Text = "" Then
+        MsgBox "Enter the name of the firm that you would like to search for": Exit Sub
+    End If
+    
+    Set wBookTwo = ThisWorkbook
+   
+    Set wSheetTwo = wBookTwo.Worksheets("Database")
+        
+    With wSheetTwo
+        wRow = Application.Match(frmDataEntry.cmbTxtName.Text, wSheetTwo.Columns(4), 0)
+        If Not IsError(wRow) Then
+            'frmDataEntry.txtName.Text = .Cells(wRow, 4)
+            frmDataEntry.uid.Text = .Cells(wRow, 3)
+            frmDataEntry.cmbFirmType.Text = .Cells(wRow, 7)
+            frmDataEntry.cmbFrmClass.Text = .Cells(wRow, 8)
+            frmDataEntry.cmbCmpnySize.Text = .Cells(wRow, 15)
+            frmDataEntry.cmbCntry.Text = .Cells(wRow, 14)
+            
+            If .Cells(wRow, 12) = "No" Then
+                 frmDataEntry.optNoMan.Value = True
+            End If
+            
+            If .Cells(wRow, 12) = "Yes" Then
+                 frmDataEntry.optYesMan.Value = True
+            End If
+            
+            If .Cells(wRow, 13) = "No" Then
+                 frmDataEntry.optNoOwn = True
+            End If
+            
+            If .Cells(wRow, 13) = "Yes" Then
+                 frmDataEntry.optYesOwn.Value = True
+            End If
+            
+            
+            Else
+            MsgBox "Firm not found. Please sumbit this firm as a new firm.", vbOKOnly + vbInformation, "No Results"
+            Call Reset
+        End If
+            
+                
+    End With
+        
+End Sub
+
+Private Sub cmdSubmit_Click()
+    Dim iMessage As VbMsgBoxResult
+    
+    iMessage = MsgBox("Do you want to submit the firm data?", vbYesNo + vbQuestion, "Submit")
+    
+    If iMessage = vbNo Then Exit Sub
+    
+    If ValidEntry = True Then
+        Call Submit_Data
+    End If
+    
+End Sub
+
+Private Sub Userform_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+
+    hoverSubmit.Visible = True
+
+
+End Sub
+
+Private Sub UserForm_Initialize()
+    
+    With frmDataEntry
+        .Width = 460
+        .Height = 518
+    End With
+   
+    Call Reset
+
+End Sub
+
+
+Private Sub cmdLookup_Click()
+    Dim lastrow As Long
+    Dim count As Integer
+    Dim wRow
+    Dim appT As New Excel.Application
+    Dim wSheetTwo As Excel.Worksheet
+    Dim wBookTwo As Excel.Workbook
+    
+    If frmDataEntry.cmbTxtName.Text = "" Then
+        MsgBox "Enter the name of the firm that you would like to search for": Exit Sub
+    End If
+    
+    Set wBookTwo = ThisWorkbook
+   
+    Set wSheetTwo = wBookTwo.Worksheets("Database")
+        
+    With wSheetTwo
+        wRow = Application.Match(frmDataEntry.cmbTxtName.Text, wSheetTwo.Columns(4), 0)
+        If Not IsError(wRow) Then
+            'frmDataEntry.txtName.Text = .Cells(wRow, 4)
+            frmDataEntry.uid.Text = .Cells(wRow, 3)
+            frmDataEntry.cmbFirmType.Text = .Cells(wRow, 7)
+            frmDataEntry.cmbFrmClass.Text = .Cells(wRow, 8)
+            frmDataEntry.cmbCmpnySize.Text = .Cells(wRow, 15)
+            frmDataEntry.cmbCntry.Text = .Cells(wRow, 14)
+            
+            If .Cells(wRow, 12) = "No" Then
+                 frmDataEntry.optNoMan.Value = True
+            End If
+            
+            If .Cells(wRow, 12) = "Yes" Then
+                 frmDataEntry.optYesMan.Value = True
+            End If
+            
+            If .Cells(wRow, 13) = "No" Then
+                 frmDataEntry.optNoOwn = True
+            End If
+            
+            If .Cells(wRow, 13) = "Yes" Then
+                 frmDataEntry.optYesOwn.Value = True
+            End If
+            
+            
+            Else
+            MsgBox "Firm not found. Please sumbit this firm as a new firm.", vbOKOnly + vbInformation, "No Results"
+            Call Reset
+        End If
+            
+                
+    End With
+        
+End Sub
+
+Private Sub cmdSubmit_Click()
+    Dim iMessage As VbMsgBoxResult
+    
+    iMessage = MsgBox("Do you want to submit the firm data?", vbYesNo + vbQuestion, "Submit")
+    
+    If iMessage = vbNo Then Exit Sub
+    
+    If ValidEntry = True Then
+        Call Submit_Data
+    End If
+    
+End Sub
+
+Private Sub Userform_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+
+    hoverSubmit.Visible = True
+
+
+End Sub
+
+Private Sub UserForm_Initialize()
+    
+    With frmDataEntry
+        .Width = 460
+        .Height = 518
+    End With
+   
+    Call Reset
+
+End Sub
